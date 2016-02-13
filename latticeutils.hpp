@@ -10,10 +10,15 @@
 
 #include <math.h>
 #include <functional>
+#include <vector>
 #include "latticedata.hpp"
+
 
 namespace lattice {
 
+    /**
+     * Utilities for working with lattice data
+     */
     class LatticeUtils {
     public:
 
@@ -196,6 +201,13 @@ namespace lattice {
             }
         }
 
+        /**
+         * Retrieve reference to lattice data
+         * @return reference to lattice data
+         */
+        const LatticeData& getData() const {
+            return mData;
+        }
 
     private:
 

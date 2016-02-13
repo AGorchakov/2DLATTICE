@@ -17,12 +17,12 @@ namespace lattice {
      */
     struct LatticeData {
         /**
-         * Number of main layers
+         * Number of modeling layers
          */
         int mNumLayers;
 
         /**
-         * The maximal radius of potential interaction
+         * The maximal radius of atomic interaction, beyond this radius the energy is zero
          */
         double mRadius;
 
@@ -30,11 +30,6 @@ namespace lattice {
          * The length of the material piece to model
          */
         double mLength;
-
-        /**
-         * The height of the material piece to model
-         */
-        double mHeight;
 
         /**
          * Layer's atoms, each atom is identified by an integral number

@@ -1,7 +1,8 @@
 #include <iostream>
 #include "ppenergy.hpp"
 #include "atoms.hpp"
-#include "pairpotentials.hpp"
+#include "tsofenergy.hpp"
+#include "carbontersoff.hpp"
 
 int main(int argc, char* argv[]) {
 
@@ -21,26 +22,19 @@ int main(int argc, char* argv[]) {
     /**
      * Setup potential
      */
-    double qcut = data.mRadius * data.mRadius;
-    double d = 0.15;
-    double qmin = (data.mRadius - d) * (data.mRadius - d);
-    double qdelta = qcut - qmin;
-    // Lennard Jones
-    lattice::PotentialCutter pc(qcut, qdelta, lattice::ljpotent);
-
-    /**
-     * Setup energy
-     */
+    lattice::TersoffParams tparam;
+    lattice::fillCarbonParametersTersoffOriginal(tparam);
+    lattice::TersoffUtils tutils(tparam);
     lattice::LatticeUtils lut(data);
-    lattice::PairPotentialEnergy enrg(lut, pc);
+    lattice::TersoffEnergy enrg(lut, tutils);
 
     /**
      * Setup lattice parameters
      */
-    double x[data.mNumLayers * 3] = {1, 0, 1, 1, 0.5, 1, 1, 0, 1, 1, 0.5, 1};
+    double x[data.mNumLayers * 3] = {1.46, 0, 2.5, 0.73, 1.25, 2.5, 1.46, 1.25, 2.5, 0.73, 0, 2.5};
 
     double v = enrg.energy(x);
-    
+
     std::cout << "v = " << v << "\n";
 
     return 0;

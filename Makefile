@@ -5,8 +5,11 @@
 # C++ compiler
 CPP = c++
 
+# Snowgoose utility folder
+SNOWGOOSE = ../
+
 # include folders
-INCLUDE = ../
+INCLUDE = $(SNOWGOOSE)
 
 # C++ compiler options
 CPPOPTS = --std=c++11 -I$(INCLUDE)
@@ -18,7 +21,7 @@ LIBS =
 LDFLAGS = -pthread 
 
 
-all: testlj.exe
+all: testlj.exe testtsof.exe
 
 -include deps.inc
 
