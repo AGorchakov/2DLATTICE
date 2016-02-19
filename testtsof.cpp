@@ -31,7 +31,7 @@ int main(int argc, char* argv[]) {
     /**
      * Setup lattice parameters
      */
-    double x[data.mNumLayers * 3] = {1.46, 0, 2.5, 0.73, 1.25, 2.5, 1.46, 1.25, 2.5, 0.73, 0, 2.5};
+    double x[] = {1.46, 0, 2.5, 0.73, 1.25, 2.5, 1.46, 1.25, 2.5, 0.73, 0, 2.5};
 
     double v = enrg.energy(x);
 
