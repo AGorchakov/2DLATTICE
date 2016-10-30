@@ -18,6 +18,9 @@ namespace lattice {
 
     /**
      * Utilities for working with lattice data
+     * Lattice parameters are stored as follows: h0 d0 s0 h1 d1 s1 .... hn-1 dn-1 sn-1
+     * where hi - the difference between layers i and i - 1, di - displacement of the first atom in i-th row, si - stride in the i-th row
+     * h0 is the distance between last layer and the 0-th layer in the next periodic group
      */
     class LatticeUtils {
     public:
@@ -31,7 +34,7 @@ namespace lattice {
         /**
          * Computes layers height by its number
          * @param i the number of the layer
-         * @param x the layer's data
+         * @param x the layer's parameters
          * @return layer's height from the 0 level (may be positive, zero or negative)
          */
         double getLayerHeight(int i, const double* x) const {
