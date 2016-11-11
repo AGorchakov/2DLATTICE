@@ -132,8 +132,8 @@ namespace lattice {
             return v;
         }
 
-        const TersoffUtils& mTutils;
-        const LatticeUtils& mLatticeUtils;
+        const TersoffUtils mTutils;
+        const LatticeUtils mLatticeUtils;
         bool mFixedAtoms;
         bool mOnceComputed;
 

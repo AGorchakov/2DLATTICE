@@ -214,7 +214,7 @@ namespace lattice {
 
     private:
 
-        const LatticeData& mData;
+        const LatticeData mData;
 
     };
 }

@@ -105,7 +105,7 @@ namespace lattice {
         }
         
     private:
-        const TersoffParams& mTpar;
+        const TersoffParams mTpar;
     };
 }
 
