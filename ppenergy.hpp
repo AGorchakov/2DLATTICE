@@ -111,7 +111,7 @@ namespace lattice {
 
 
         std::function< double (int, int, double) > mPotent;
-        const LatticeUtils& mLatticeModel;
+        const LatticeUtils mLatticeModel;
         bool mFixedAtoms;
         bool mOnceComputed;
         std::vector< int > mLBounds;

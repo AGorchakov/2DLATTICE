@@ -22,6 +22,12 @@ namespace lattice {
          * @return the energy
          */
         virtual double energy(const double* x) = 0;
+        
+        /**
+         * Sets fixed atoms regime on or off. Fixed atoms means that the energy is computed for a set of atoms rather than a piece of material
+         * @param onoff on - true, off - false
+         */
+        virtual void setFixedAtoms(bool onoff) = 0;
     };
 }
 
