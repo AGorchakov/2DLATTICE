@@ -57,6 +57,22 @@ namespace lattice {
             mFixedAtoms = onoff;
             mOnceComputed = false;
         }
+        
+        /**
+         * Retrieve lower bounds
+         * @return vector of lower bounds
+         */
+        const std::vector<int>& getLBounds() const {
+            return mLBounds;
+        }
+
+        /**
+         * Retrieve lower bounds
+         * @return vector of lower bounds
+         */
+        const std::vector<int>& getUBounds() const {
+            return mUBounds;
+        }
 
     private:
 

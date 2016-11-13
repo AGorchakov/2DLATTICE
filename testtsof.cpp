@@ -37,5 +37,11 @@ int main(int argc, char* argv[]) {
 
     std::cout << "v = " << v << "\n";
 
+    for(auto i : enrg.getLBounds()) {
+        std::cout << i << "\n";
+    }
+    for(auto i : enrg.getUBounds()) {
+        std::cout << i << "\n";
+    }
     return 0;
 }
