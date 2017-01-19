@@ -8,6 +8,7 @@
 #ifndef LATTICEDATA_HPP
 #define	LATTICEDATA_HPP
 
+#include <vector>
 #include "latlimits.hpp"
 
 namespace lattice {
@@ -34,7 +35,7 @@ namespace lattice {
         /**
          * Layer's atoms, each atom is identified by an integral number
          */
-        int mLayersAtoms[MAX_LAYERS];
+        std::vector<int> mLayersAtoms;
 
     };
 
