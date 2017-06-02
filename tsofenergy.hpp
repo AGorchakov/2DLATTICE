@@ -137,14 +137,14 @@ namespace lattice {
                                 }
                             }
                         };
-                        mLatticeUtils.traverseLattice(i, j, ang, x);
+                        mLatticeUtils.traverseLattice(i, j, x, ang);
                         double bij = mTutils.computeBij(zij);
                         v += fc * (mTutils.VR(r) - bij * mTutils.VA(r));
                     }
                 }
             };
 
-            mLatticeUtils.traverseLattice(i, j, inter, x);
+            mLatticeUtils.traverseLattice(i, j, x, inter);
             return v;
         }
 

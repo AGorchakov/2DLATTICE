@@ -24,9 +24,11 @@ namespace lattice {
      */
     class LatticeUtils {
     public:
+                
 
         /**
          * Constructor
+         * @param data basic lattice data
          */
         LatticeUtils(const LatticeData& data) : mData(data) {
         }
@@ -34,7 +36,7 @@ namespace lattice {
         /**
          * Computes layers height by its number
          * @param i the number of the layer
-         * @param x the layer's parameters
+         * @param x the lattice  parameters
          * @return layer's height from the 0 level (may be positive, zero or negative)
          */
         double getLayerHeight(int i, const double* x) const {
@@ -42,12 +44,12 @@ namespace lattice {
             if (i > 0) {
                 for (int j = 1; j <= i; j++) {
                     int J = getReferenceLayer(j);
-                    h += x[3 * J];
+                    h += x[LatticeData::RecSize * J];
                 }
             } else if (i < 0) {
                 for (int j = 0; j > i; j--) {
                     int J = getReferenceLayer(j);
-                    h -= x[3 * J];
+                    h -= x[LatticeData::RecSize * J];
                 }
             }
             return h;
@@ -74,8 +76,8 @@ namespace lattice {
          */
         void getDisplacementAndStride(int l, double& d, double& s, const double* x) const {
             int r = getReferenceLayer(l);
-            d = x[3 * r + 1];
-            s = x[3 * r + 2];
+            d = x[LatticeData::RecSize * r + LatticeData::Displ];
+            s = x[LatticeData::RecSize * r + LatticeData::Stride];
         }
 
         /**
@@ -92,7 +94,7 @@ namespace lattice {
         }
 
         /**
-         * Computes the square of euclidian distance between two atoms given by their 
+         * Computes the square of Euclidian distance between two atoms given by their 
          * layer number and number in a layer
          * @param i1 first atoms layer
          * @param j1 first atoms number
@@ -134,9 +136,10 @@ namespace lattice {
          * Traverses the neighbourhood (including atom itself) of a given atom defined by the model cut radius
          * @param i atom's layer
          * @param j atom's position in a layer
+         * @param x lattice parameters
          * @param compf functor to call for each atom
          */
-        void traverseLattice(int i, int j, std::function <void (int, int) > compf, const double* x) const {
+        void traverseLattice(int i, int j, const double* x, std::function <void (int, int) > compf) const {
             double myx = getOffset(i, j, x);
             double myy = getLayerHeight(i, x);
             /**

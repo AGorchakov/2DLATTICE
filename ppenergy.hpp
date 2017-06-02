@@ -105,7 +105,7 @@ namespace lattice {
                 }
             };
 
-            mLatticeModel.traverseLattice(i, j, inter, x);
+            mLatticeModel.traverseLattice(i, j, x, inter);
             return v;
         }
 

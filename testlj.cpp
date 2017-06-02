@@ -5,12 +5,11 @@
 
 int main(int argc, char* argv[]) {
 
-    lattice::LatticeData data;
+    lattice::LatticeData data(4);
 
     /**
      * Setup lattice data
      */
-    data.mNumLayers = 4;
     data.mLength = 16;
     data.mRadius = 3;
     data.mLayersAtoms[0] = lattice::CARBON;

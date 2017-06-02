@@ -12,7 +12,7 @@ SNOWGOOSE = ../
 INCLUDE = $(SNOWGOOSE)
 
 # C++ compiler options
-CPPOPTS = --std=c++11 -I$(INCLUDE)
+CPPOPTS = --std=c++14 -I$(INCLUDE) -g
 
 # Libraries to inculde 
 LIBS = 
