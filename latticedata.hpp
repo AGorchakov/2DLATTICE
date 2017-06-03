@@ -10,6 +10,7 @@
 
 #include <vector>
 #include "latlimits.hpp"
+#include "atoms.hpp"
 
 namespace lattice {
 
@@ -36,14 +37,9 @@ namespace lattice {
         double mRadius;
 
         /**
-         * The length of the material piece to model
-         */
-        double mLength;
-
-        /**
          * Layer's atoms, each atom is identified by an integral number
          */
-        std::vector<int> mLayersAtoms;
+        std::vector<AtomTypes> mLayersAtoms;
 
         /**
          * Indices in Lattice data array

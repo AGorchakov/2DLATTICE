@@ -10,6 +10,8 @@
 #ifndef PAIRPOTENTIALS_HPP
 #define	PAIRPOTENTIALS_HPP
 
+#include "atoms.hpp"
+
 namespace lattice {
 
     /**
@@ -19,7 +21,7 @@ namespace lattice {
      * @param q the square distance
      * @return the value of potential
      */
-    double sqrpotent(int a1, int a2, double q) {
+    double sqrpotent(AtomTypes a1, AtomTypes a2, double q) {
         return (q - 1)*(q - 1) - 1;
     }
 
@@ -30,7 +32,7 @@ namespace lattice {
      * @param q the square distance
      * @return the value of potential
      */
-    double ljpotent(int a1, int a2, double q) {
+    double ljpotent(AtomTypes a1, AtomTypes a2, double q) {
         if (q == 0)
             q = 0.00001;
         double u = q * q * q;
@@ -46,7 +48,7 @@ namespace lattice {
      * @param q the square distance
      * @return the value of potential
      */
-    double morsepotent(int a1, int a2, double q) {
+    double morsepotent(AtomTypes a1, AtomTypes a2, double q) {
         double r = sqrt(q);
         const double rho = 14;
         double E = exp(rho * (1 - r));
@@ -66,7 +68,7 @@ namespace lattice {
          * @param D cutoff delta
          * @param potent potential function
          */
-        PotentialCutter(double Q, double D, std::function<double (int, int, double)> potent)
+        PotentialCutter(double Q, double D, PairPotential potent)
         : mQ(Q), mD(D), mPotent(potent) {
         }
 
@@ -77,7 +79,7 @@ namespace lattice {
          * @param q the square distance
          * @return the value of potential
          */
-        double operator () (int a1, int a2, double q) {
+        double operator () (AtomTypes a1, AtomTypes a2, double q) {
             double m;
             if (q <= mQ - mD) {
                 return mPotent(a1, a2, q);
@@ -97,7 +99,7 @@ namespace lattice {
 
         double mQ;
         double mD;
-        std::function<double (int a1, int a2, double q) > mPotent;
+        PairPotential mPotent;
 
     };
 }

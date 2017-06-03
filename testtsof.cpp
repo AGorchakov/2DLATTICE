@@ -6,17 +6,17 @@
 
 int main(int argc, char* argv[]) {
 
-    lattice::LatticeData data(4);
-
+    // Number of layers
+    constexpr int n = 4;
+    // Length of the material piece
+    constexpr double length = 16;
+    
     /**
      * Setup lattice data
      */
-    data.mLength = 16;
+    lattice::LatticeData data(n);
     data.mRadius = 3;
-    data.mLayersAtoms[0] = lattice::CARBON;
-    data.mLayersAtoms[1] = lattice::CARBON;
-    data.mLayersAtoms[2] = lattice::CARBON;
-    data.mLayersAtoms[3] = lattice::CARBON;
+    data.mLayersAtoms.assign(n, lattice::AtomTypes::CARBON);
 
     /**
      * Setup potential
@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
     lattice::fillCarbonParametersTersoffOriginal(tparam);
     lattice::TersoffUtils tutils(tparam);
     lattice::LatticeUtils lut(data);
-    lattice::TersoffEnergy enrg(lut, tutils);
+    lattice::TersoffEnergy enrg(lut, tutils, length);
 
     /**
      * Setup lattice parameters
@@ -37,10 +37,12 @@ int main(int argc, char* argv[]) {
     std::cout << "v = " << v << "\n";
 
     for(auto i : enrg.getLBounds()) {
-        std::cout << i << "\n";
+        std::cout << i << "\t";
     }
+    std::cout << "\n";
     for(auto i : enrg.getUBounds()) {
-        std::cout << i << "\n";
+        std::cout << i << "\t";
     }
+    std::cout << "\n";
     return 0;
 }

@@ -6,7 +6,7 @@
  */
 
 #ifndef LATTICEUTILS_HPP
-#define	LATTICEUTILS_HPP
+#define LATTICEUTILS_HPP
 
 #include <math.h>
 #include <functional>
@@ -24,7 +24,6 @@ namespace lattice {
      */
     class LatticeUtils {
     public:
-                
 
         /**
          * Constructor
@@ -186,10 +185,11 @@ namespace lattice {
         /**
          * Computes bounds of atom indeces based on the rectangle shape
          * @param x lattice parameters
+         * @param length the length of the material piece
          * @param lbounds lower indices
          * @param rbounds upper indices
          */
-        void computeBounds(const double* x, std::vector<int> &lbounds, std::vector<int> &rbounds) const {
+        void computeBounds(const double* x, double length, std::vector<int> &lbounds, std::vector<int> &rbounds) const {
             for (int i = 0; i < mData.mNumLayers; i++) {
                 int a = 0, b = -1;
                 int j = -1;
@@ -198,7 +198,7 @@ namespace lattice {
                     j--;
                 }
                 j = 0;
-                while (getOffset(i, j, x) <= mData.mLength) {
+                while (getOffset(i, j, x) <= length) {
                     b = j;
                     j++;
                 }
@@ -222,5 +222,5 @@ namespace lattice {
     };
 }
 
-#endif	/* LATTICEUTILS_HPP */
+#endif /* LATTICEUTILS_HPP */
 

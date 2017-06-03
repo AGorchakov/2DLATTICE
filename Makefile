@@ -5,16 +5,15 @@
 # C++ compiler
 CPP = c++
 
-# Snowgoose utility folder
-SNOWGOOSE = ../
+
 
 # include folders
-INCLUDE = $(SNOWGOOSE)
+INCLUDE = 
 
 # C++ compiler options
 CPPOPTS = --std=c++14 -I$(INCLUDE) -g
 
-# Libraries to inculde 
+# Libraries to include 
 LIBS = 
 
 # Linkers flags

@@ -8,15 +8,25 @@
  */
 
 #ifndef ATOMS_HPP
-#define	ATOMS_HPP
+#define ATOMS_HPP
 
 namespace lattice {
+
     /**
-     * Carbon atom
+     * Atom types
      */
-    static const int CARBON = 1;
+    enum class AtomTypes : char {
+        // Carbon
+        CARBON
+    };
+
+    /**
+     * Pair potential function type
+     */
+    using PairPotential = std::function <double (AtomTypes, AtomTypes, double) >;
+
 }
 
 
-#endif	/* ATOMS_HPP */
+#endif /* ATOMS_HPP */
 

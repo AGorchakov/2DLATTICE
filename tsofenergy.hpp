@@ -27,10 +27,12 @@ namespace lattice {
 
         /**
          * Constructor
-         * @param model reference to the model   
+         * @param utils reference to the model   
+         * @param tutils reference to Tersoff utils
+         * @param length the length of the modeling piece of material
          */
-        TersoffEnergy(const LatticeUtils& utils, const TersoffUtils& tutils) :
-        mLatticeUtils(utils), mTutils(tutils), mFixedAtoms(false), mOnceComputed(false) {
+        TersoffEnergy(const LatticeUtils& utils, const TersoffUtils& tutils, double length) :
+        mLatticeUtils(utils), mTutils(tutils), mFixedAtoms(false), mOnceComputed(false), mLength(length) {
             mLBounds.resize(utils.getData().mNumLayers);
             mUBounds.resize(utils.getData().mNumLayers);
         }
@@ -87,10 +89,10 @@ namespace lattice {
         double layerEnergy(int i, const double* x)  {
             double E = 0;
             if (!mFixedAtoms)
-                mLatticeUtils.computeBounds(x, mLBounds, mUBounds);
+                mLatticeUtils.computeBounds(x, mLength, mLBounds, mUBounds);
             else if(!mOnceComputed) {
                 mOnceComputed = true;
-                mLatticeUtils.computeBounds(x, mLBounds, mUBounds);
+                mLatticeUtils.computeBounds(x, mLength, mLBounds, mUBounds);
             }
             for (int j = mLBounds[i]; j <= mUBounds[i]; j++) {
                 E += atomEnergy(i, j, x);
@@ -152,6 +154,7 @@ namespace lattice {
         const LatticeUtils mLatticeUtils;
         bool mFixedAtoms;
         bool mOnceComputed;
+        double mLength;
 
         std::vector< int > mLBounds;
         std::vector< int > mUBounds;

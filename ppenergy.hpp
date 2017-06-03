@@ -8,7 +8,7 @@
  */
 
 #ifndef PAIRPOTENTIALENERGY_HPP
-#define	PAIRPOTENTIALENERGY_HPP
+#define PAIRPOTENTIALENERGY_HPP
 
 #include <math.h>
 #include <functional>
@@ -27,11 +27,11 @@ namespace lattice {
         /**
          * Constructor
          * @param model reference to the model
-         * @param potent reference to the potential functional
-         * the potential functional returns the energy of two atoms (given by their kind) interaction and the square of Euclidian distance between them
+         * @param potent reference to the potential function that returns the energy of two atoms (given by their kind) interaction and the square of Euclidian distance between them
+         * @param length the length of the material piece
          */
-        PairPotentialEnergy(const LatticeUtils& model, std::function <double (int, int, double) > potent) :
-        mLatticeModel(model), mPotent(potent), mFixedAtoms(false), mOnceComputed(false) {
+        PairPotentialEnergy(const LatticeUtils& model, PairPotential potent, double length) :
+        mLatticeModel(model), mPotent(potent), mFixedAtoms(false), mOnceComputed(false), mLength(length) {
             mLBounds.resize(model.getData().mNumLayers);
             mUBounds.resize(model.getData().mNumLayers);
         }
@@ -71,10 +71,10 @@ namespace lattice {
         double layerEnergy(int i, const double* x) {
             double E = 0;
             if (!mFixedAtoms)
-                mLatticeModel.computeBounds(x, mLBounds, mUBounds);
+                mLatticeModel.computeBounds(x, mLength, mLBounds, mUBounds);
             else if (!mOnceComputed) {
                 mOnceComputed = true;
-                mLatticeModel.computeBounds(x, mLBounds, mUBounds);
+                mLatticeModel.computeBounds(x, mLength, mLBounds, mUBounds);
             }
             for (int j = mLBounds[i]; j <= mUBounds[i]; j++) {
                 E += atomEnergy(i, j, x);
@@ -99,8 +99,8 @@ namespace lattice {
 
                 if (!((i == i2) && (j == j2))) {
                     double q = mLatticeModel.getSqrDistance(i, j, i2, j2, x);
-                    int a1 = mLatticeModel.getData().mLayersAtoms[mLatticeModel.getReferenceLayer(i)];
-                    int a2 = mLatticeModel.getData().mLayersAtoms[mLatticeModel.getReferenceLayer(i2)];
+                    AtomTypes a1 = mLatticeModel.getData().mLayersAtoms[mLatticeModel.getReferenceLayer(i)];
+                    AtomTypes a2 = mLatticeModel.getData().mLayersAtoms[mLatticeModel.getReferenceLayer(i2)];
                     v += mPotent(a1, a2, q);
                 }
             };
@@ -110,15 +110,16 @@ namespace lattice {
         }
 
 
-        std::function< double (int, int, double) > mPotent;
+        PairPotential mPotent;
         const LatticeUtils mLatticeModel;
         bool mFixedAtoms;
         bool mOnceComputed;
+        double mLength;
         std::vector< int > mLBounds;
         std::vector< int > mUBounds;
     };
 
 }
 
-#endif	/* PPENERGY_HPP */
+#endif /* PPENERGY_HPP */
 

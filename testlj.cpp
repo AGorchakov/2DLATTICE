@@ -5,17 +5,18 @@
 
 int main(int argc, char* argv[]) {
 
-    lattice::LatticeData data(4);
+    // Number of layers in the model
+    constexpr int n = 4;
+    // Length of the modeling piece of material
+    constexpr double length = 16;
+
+    lattice::LatticeData data(n);
 
     /**
      * Setup lattice data
      */
-    data.mLength = 16;
     data.mRadius = 3;
-    data.mLayersAtoms[0] = lattice::CARBON;
-    data.mLayersAtoms[1] = lattice::CARBON;
-    data.mLayersAtoms[2] = lattice::CARBON;
-    data.mLayersAtoms[3] = lattice::CARBON;
+    data.mLayersAtoms.assign(n, lattice::AtomTypes::CARBON);
 
     /**
      * Setup potential
@@ -31,7 +32,7 @@ int main(int argc, char* argv[]) {
      * Setup energy
      */
     lattice::LatticeUtils lut(data);
-    lattice::PairPotentialEnergy enrg(lut, pc);
+    lattice::PairPotentialEnergy enrg(lut, pc, length);
 
     /**
      * Setup lattice parameters
@@ -39,7 +40,7 @@ int main(int argc, char* argv[]) {
     double x[] = {1, 0, 1, 1, 0.5, 1, 1, 0, 1, 1, 0.5, 1};
 
     double v = enrg.energy(x);
-    
+
     std::cout << "v = " << v << "\n";
 
     return 0;
