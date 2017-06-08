@@ -10,7 +10,9 @@
 #ifndef PAIRPOTENTIALS_HPP
 #define	PAIRPOTENTIALS_HPP
 
+#include <math.h>
 #include "atoms.hpp"
+
 
 namespace lattice {
 

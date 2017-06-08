@@ -11,6 +11,7 @@
 #include <math.h>
 #include <functional>
 #include <vector>
+#include <memory>
 #include "latticedata.hpp"
 
 
@@ -217,7 +218,7 @@ namespace lattice {
 
     private:
 
-        const LatticeData mData;
+        LatticeData mData;
 
     };
 }

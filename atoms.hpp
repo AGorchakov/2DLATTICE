@@ -10,6 +10,8 @@
 #ifndef ATOMS_HPP
 #define ATOMS_HPP
 
+#include <functional>
+
 namespace lattice {
 
     /**
@@ -20,6 +22,16 @@ namespace lattice {
         CARBON
     };
 
+    /**
+     * Standard cutoff radius
+     */
+    constexpr double stdCutoff = 3;
+    
+    /**
+     * Standard smoothing distance
+     */
+    constexpr double stdSmothing = 0.15;
+    
     /**
      * Pair potential function type
      */
