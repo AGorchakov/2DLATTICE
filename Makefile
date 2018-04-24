@@ -5,14 +5,6 @@
 # C++ compiler
 CPP = c++
 
-SNOWGOOSE=../snowgoose
-
-COMPI=../COMPI
-
-
-# include folders
-INCLUDE = -I$(SNOWGOOSE) -I$(COMPI)
-
 # C++ compiler options
 CPPOPTS = --std=c++14 $(INCLUDE) -g
 
@@ -23,8 +15,7 @@ LIBS =
 LDFLAGS = -pthread 
 
 
-all: testlj.exe testtsof.exe testppproblem.exe
-
+all: testlj.exe testtsof.exe 
 -include deps.inc
 
 clean: 

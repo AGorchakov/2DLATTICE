@@ -20,7 +20,7 @@ namespace lattice {
         EnergyFunc(std::shared_ptr<Energy> energy) : mEnergy(energy) {
         }
 
-        double func(const double* x) {
+        double func(const double* x) const {
             return mEnergy->energy(x);
         }
 

@@ -41,7 +41,7 @@ namespace lattice {
          * @param x parameters, defining the layers height, displacements and interatomic distances
          * @return the energy
          */
-        double energy(const double* x) {
+        double energy(const double* x)  {
             double E = 0;
             int i;
             for (i = 0; i < mLatticeModel.getData().mNumLayers; i++) {
