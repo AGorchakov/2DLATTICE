@@ -45,7 +45,7 @@ namespace lattice {
         double energy(const double* x)  {
             double E = 0;
             for (int i = 0; i < mLatticeUtils.getData().mNumLayers; i++) {
-                E += layerEnergy(i, x);
+                E += layerEnergy(i, (double*)x);
             }
 
             return E;
@@ -86,8 +86,9 @@ namespace lattice {
          * @param x layer's data
          * @return energy value
          */
-        double layerEnergy(int i, const double* x)  {
+        double layerEnergy(int i, double* x)  {
             double E = 0;
+            x[3*i+1] = fmod(x[3*i+1], x[3*i+2]);
             if (!mFixedAtoms)
                 mLatticeUtils.computeBounds(x, mLength, mLBounds, mUBounds);
             else if(!mOnceComputed) {
